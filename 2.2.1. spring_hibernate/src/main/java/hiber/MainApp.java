@@ -13,7 +13,7 @@ public class MainApp {
     public static void main(String[] args) throws SQLException {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
-
+//      WARN!!!  hibernate.hbm2ddl.auto=create
         UserService userService = context.getBean(UserService.class);
 
         userService.add(new User("User1", "Lastname1", "user1@mail.ru", new Car("toyota", 562348)));
