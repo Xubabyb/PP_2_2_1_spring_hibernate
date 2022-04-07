@@ -1,5 +1,6 @@
 package hiber.dao;
 
+import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,17 @@ public class UserDaoImp implements UserDao {
     @Override
     public void update(User user) {
         sessionFactory.getCurrentSession().update(user);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public User getUserByCar(Car car) {
+        TypedQuery<User> query = sessionFactory.getCurrentSession()
+                .createQuery("select user from User as user where user.car.model = :model " +
+                        "and user.car.series = :series")
+                .setParameter("model", car.getModel())
+                .setParameter("series", car.getSeries());
+        return query.getSingleResult();//.getResultStream().findAny().orElseThrow();
     }
 
 }

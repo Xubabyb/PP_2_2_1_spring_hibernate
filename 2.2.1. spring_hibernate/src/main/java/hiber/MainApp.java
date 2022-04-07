@@ -6,11 +6,10 @@ import hiber.model.User;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MainApp {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 //      WARN!!!  hibernate.hbm2ddl.auto=create
@@ -21,7 +20,8 @@ public class MainApp {
         userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car("lincoln", 568444)));
         userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car("tesla", 350455)));
 
-        //добавить 'лень' чтобы не тянуть кары пока они не надо, хмм.. что то тут есть надо поразмыслить
+//      Добавить 'лень' чтобы не тянуть кары пока они не надо, хмм.. что то тут есть непонятное надо поразмыслить
+
         List<User> users = userService.listUsers();
         for (User user : users) {
             System.out.println("Id = " + user.getId());
@@ -31,6 +31,8 @@ public class MainApp {
             System.out.println("Car = " + user.getCar().getModel());
             System.out.println();
         }
+        System.out.println("____________________________________");
+        System.out.println(userService.getUserByCar(new Car("lincoln", 568444)));
         context.close();
     }
 }

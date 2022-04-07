@@ -36,8 +36,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.car = car;
-        car.setUser(this);
+        setCar(car);
     }
 
     public Car getCar() {
@@ -45,6 +44,7 @@ public class User {
     }
 
     public void setCar(Car car) {
+        car.setUser(this);
         this.car = car;
     }
 
@@ -88,6 +88,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", car=" + car +
-                '}';
+                "}";
     }
 }
